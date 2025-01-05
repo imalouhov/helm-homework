@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm-homework-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helm-homework
+  template:
+    metadata:
+      labels:
+        app: helm-homework
+    spec:
+      containers:
+        - image: imalouhov/helm-homework:0.0.1
+          name: homework-pod
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
