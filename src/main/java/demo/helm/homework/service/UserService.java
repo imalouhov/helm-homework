@@ -1,6 +1,7 @@
 package demo.helm.homework.service;
 
 import demo.helm.homework.dto.UserDto;
+import demo.helm.homework.entity.UserEntity;
 import demo.helm.homework.mapper.UserMapper;
 import demo.helm.homework.repository.UserRepository;
 import lombok.AccessLevel;
@@ -17,19 +18,19 @@ import java.util.UUID;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserService {
 
-    UserRepository userRepository;
+//    UserRepository userRepository;
     UserMapper userMapper;
 
-    public List<UserDto> getAll() {
-        return userMapper.mapList(userRepository.findAll());
-    }
-
-    public UserDto addUser(UserDto dto) {
-        return userMapper.map(userRepository.save(userMapper.map(dto)));
-    }
-
-    public Optional<UserDto> getById(UUID id) {
-        return userMapper.map(userRepository.findById(id));
-    }
-
+//    public List<UserDto> getAll() {
+//        return userMapper.mapList(userRepository.findAll());
+//    }
+//
+//    public UserDto addUser(UserDto dto) {
+//        return userMapper.map(userRepository.save(userMapper.map(dto)));
+//    }
+//
+//    public Optional<UserDto> getById(UUID id) {
+//        Optional<UserEntity> optional = userRepository.findById(id);
+//        return optional.map(userMapper::map);
+//    }
 }

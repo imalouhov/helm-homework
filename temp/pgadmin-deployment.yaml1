@@ -25,7 +25,7 @@ spec:
                   name: pgadmin-secret
                   key: pgadmin-default-password
             - name: PGADMIN_PORT
-              value: "80"
+              value: 80
           ports:
             - containerPort: 80
               name: pgadminport

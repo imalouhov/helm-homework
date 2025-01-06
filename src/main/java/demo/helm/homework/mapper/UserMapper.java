@@ -15,6 +15,4 @@ public interface UserMapper {
     UserEntity map(UserDto dto);
 
     List<UserDto> mapList(List<UserEntity> all);
-
-    Optional<UserDto> map(Optional<UserEntity> optional);
 }
