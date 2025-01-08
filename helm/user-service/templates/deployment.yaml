@@ -12,6 +12,21 @@ spec:
       labels:
         app: helm-homework
     spec:
+      spec:
+        initContainers:
+          - name: liquibase
+            image: liquibase/liquibase:latest
+            command: [ "liquibase", "update", "--changeLogFile=/liquibase/changelog/changelog.xml" ]
+            env:
+              - name: DATABASE_URL
+                value: "jdbc:postgresql://172.24.10.222:32029/users"
+              - name: DATABASE_USERNAME
+                value: "admin"
+              - name: DATABASE_PASSWORD
+                value: "admin"
+            volumeMounts:
+              - name: liquibase-changelog-volume
+                mountPath: /liquibase/changelog/
       containers:
         - image: imalouhov/helm-homework:0.0.1
           name: homework-pod
@@ -20,3 +35,41 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          env:
+            - name: DATABASE_URL
+              value: "jdbc:postgresql://172.24.10.222:32029/users"
+            - name: DATABASE_USERNAME
+              value: "admin"
+            - name: DATABASE_PASSWORD
+              value: "admin"
+      volumes:
+        - name: liquibase-changelog-volume
+          configMap:
+            name: liquibase-changelog
+            #          env:
+            #            - name: SPRING_DATASOURCE_URL
+            #              value: jdbc:postgresql://172.17.104.134:31689/users
+            ##              value: jdbc:postgresql://postgres-service/users
+            #            - name: SPRING_DATASOURCE_USERNAME
+            #              value: admin
+            #            - name: SPRING_DATASOURCE_PASSWORD
+            #              value: admin
+            ##              valueFrom:
+            ##                secretKeyRef:
+            ##                  name: postgres-secret
+            ##                  key: POSTGRES_PASSWORD
+#          volumeMounts:
+#            - name: liquibase-changelog-volume
+#              mountPath: /liquibase/changelog
+#      volumes:
+#        - name: liquibase-changelog-volume
+#          configMap:
+#            name: liquibase-changelog
+
+#          volumeMounts:        # Mounting voulume obtained from Persistent Volume Claim
+#            - name: postgres-persistent-storage
+#              mountPath: /data/postgres
+#      volumes:
+#        - name: postgres-persistent-storage # Obtaining 'volume' from PVC
+#          persistentVolumeClaim:
+#            claimName: postgres-pvc

@@ -20,7 +20,7 @@ public class UserEntity {
 //    @Column(name = "first_name", length = 50, nullable = true, unique = false)
 //    String firstName;
 //
-//    @Column(name = "second_name", length = 50, nullable = true, unique = false)
+//    @Column(name = "last_name", length = 50, nullable = true, unique = false)
 //    String lastName;
 
 }

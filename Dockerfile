@@ -1,4 +1,4 @@
 FROM openjdk:17.0.2-jdk-slim-buster
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} helm-homework.jar
+COPY target/*.jar helm-homework.jar
+COPY liquibase/changelog/*.xml /liquibase/changelog/changelog.xml
 ENTRYPOINT ["java","-jar","/helm-homework.jar"]

@@ -5,18 +5,26 @@ docker build -t imalouhov/helm-homework:0.0.1 .
 docker push imalouhov/helm-homework:0.0.1
 cd "C:\Users\pusto\Documents\java projects\helm-homework\helm"
 helm create helm-homework
-helm install db ./helm/db
+helm install postgres ./helm/postgres
 helm install user-service ./helm/user-service
+kubectl exec -it postgres-deployment-596dc8f5d4-s5hpl -- psql -U admin -d users -c '\dt'
+kubectl create configmap liquibase-changelog --from-file=liquibase/changelog/changelog.xml
+
+
 curl http://arch.homework:80/test
 
 
 172.17.107.125
-kubectl logs helm-homework-deployment-754f5bdd7d-dqw54
+172.24.10.222:32029
+kubectl get pod
+kubectl logs helm-homework-deployment-75dfdb764c-hbzgj
+kubectl logs helm-homework-deployment-75dfdb764c-kgnrh -c liquibase
 
 http://127.0.0.1:80/?key=admin
 http://arch.homework:80/?key=admin
 http://172.17.107.125:30200/?key=admin
 helm del $(helm ls --all --short)
+
 
 
 #Run Windows PowerShell as Administrator:
