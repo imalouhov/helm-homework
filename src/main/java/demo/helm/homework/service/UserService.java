@@ -18,19 +18,19 @@ import java.util.UUID;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserService {
 
-//    UserRepository userRepository;
+    UserRepository userRepository;
     UserMapper userMapper;
 
-//    public List<UserDto> getAll() {
-//        return userMapper.mapList(userRepository.findAll());
-//    }
-//
-//    public UserDto addUser(UserDto dto) {
-//        return userMapper.map(userRepository.save(userMapper.map(dto)));
-//    }
-//
-//    public Optional<UserDto> getById(UUID id) {
-//        Optional<UserEntity> optional = userRepository.findById(id);
-//        return optional.map(userMapper::map);
-//    }
+    public List<UserDto> getAll() {
+        return userMapper.mapList(userRepository.findAll());
+    }
+
+    public UserDto addUser(UserDto dto) {
+        return userMapper.map(userRepository.save(userMapper.map(dto)));
+    }
+
+    public Optional<UserDto> getById(UUID id) {
+        Optional<UserEntity> optional = userRepository.findById(id);
+        return optional.map(userMapper::map);
+    }
 }
